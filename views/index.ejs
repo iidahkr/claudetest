@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Birthday Yosetti - 誕生日メッセージボード</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <div class="cake">&#127874;</div>
+      <h1>Birthday Yosetti</h1>
+      <p class="subtitle">みんなのメッセージで誕生日をお祝いしよう</p>
+    </div>
+
+    <div class="card">
+      <h2>メッセージボードを作成</h2>
+      <p>お祝いしたい人の名前を入力して、メッセージボードを作りましょう。</p>
+      <form action="/create" method="POST">
+        <div class="form-group">
+          <label for="name">お祝いする人の名前</label>
+          <input type="text" id="name" name="name" placeholder="例: 田中太郎" required maxlength="100">
+        </div>
+        <button type="submit" class="btn btn-primary">ボードを作成する</button>
+      </form>
+    </div>
+
+    <div class="steps">
+      <h2>使い方</h2>
+      <div class="step-list">
+        <div class="step">
+          <div class="step-number">1</div>
+          <div class="step-text">
+            <strong>ボードを作成</strong>
+            <p>お祝いしたい人の名前を入力</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <div class="step-text">
+            <strong>メッセージを募集</strong>
+            <p>投稿用リンクを仲間に共有</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <div class="step-text">
+            <strong>プレゼント!</strong>
+            <p>閲覧用リンクを誕生日の人に送る</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

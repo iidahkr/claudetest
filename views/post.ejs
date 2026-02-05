@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= board.name %>さんにメッセージを送る - Birthday Yosetti</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="hero hero-small">
+      <div class="cake">&#127874;</div>
+      <h1><%= board.name %>さんの<br>お誕生日をお祝いしよう！</h1>
+    </div>
+
+    <% if (posted) { %>
+      <div class="card success-card">
+        <div class="success-icon">&#10024;</div>
+        <h2>メッセージを送りました！</h2>
+        <p><%= board.name %>さんがきっと喜びます。</p>
+        <a href="/post/<%= board.id %>" class="btn btn-primary">もう1通送る</a>
+      </div>
+    <% } else { %>
+      <div class="card">
+        <h2>お祝いメッセージを書く</h2>
+        <form action="/post/<%= board.id %>" method="POST">
+          <div class="form-group">
+            <label for="author">あなたの名前</label>
+            <input type="text" id="author" name="author" placeholder="例: 山田花子" required maxlength="100">
+          </div>
+          <div class="form-group">
+            <label for="body">メッセージ</label>
+            <textarea id="body" name="body" rows="6" placeholder="お誕生日おめでとう！&#10;今年も素敵な一年になりますように。" required maxlength="2000"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">メッセージを送る</button>
+        </form>
+      </div>
+    <% } %>
+  </div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= board.name %>さん、お誕生日おめでとう！ - Birthday Yosetti</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="view-page">
+  <div class="confetti" id="confetti"></div>
+  <div class="container">
+    <div class="hero birthday-hero">
+      <div class="cake cake-large">&#127874;</div>
+      <h1><%= board.name %>さん<br>お誕生日おめでとう！</h1>
+      <p class="subtitle">みんなからのメッセージが届いています</p>
+    </div>
+
+    <% if (messages.length === 0) { %>
+      <div class="card">
+        <p class="empty">まだメッセージがありません。</p>
+      </div>
+    <% } else { %>
+      <div class="message-grid">
+        <% messages.forEach(function(msg, i) { %>
+          <div class="birthday-message" style="animation-delay: <%= i * 0.15 %>s">
+            <div class="message-body"><%= msg.body %></div>
+            <div class="message-author">- <%= msg.author %></div>
+          </div>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+
+  <script>
+    // 紙吹雪アニメーション
+    (function() {
+      var container = document.getElementById('confetti');
+      var colors = ['#ff6b9d', '#c44dff', '#ffd93d', '#6bcb77', '#4d96ff', '#ff922b'];
+      for (var i = 0; i < 60; i++) {
+        var piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + '%';
+        piece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        piece.style.animationDelay = Math.random() * 3 + 's';
+        piece.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        container.appendChild(piece);
+      }
+    })();
+  </script>
+</body>
+</html>

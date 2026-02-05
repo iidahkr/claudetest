@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= board.name %>さんの誕生日ボード - Birthday Yosetti</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="container">
+    <div class="hero hero-small">
+      <div class="cake">&#127874;</div>
+      <h1><%= board.name %>さんの誕生日ボード</h1>
+    </div>
+
+    <div class="card">
+      <h2>リンクを共有しよう</h2>
+
+      <div class="link-section">
+        <h3>投稿用リンク（お祝いする仲間に共有）</h3>
+        <div class="link-box">
+          <input type="text" readonly value="<%= protocol %>://<%= host %>/post/<%= board.id %>" id="postLink">
+          <button class="btn btn-small" onclick="copyLink('postLink')">コピー</button>
+        </div>
+      </div>
+
+      <div class="link-section">
+        <h3>閲覧用リンク（誕生日の人に送る）</h3>
+        <div class="link-box">
+          <input type="text" readonly value="<%= protocol %>://<%= host %>/view/<%= board.view_id %>" id="viewLink">
+          <button class="btn btn-small" onclick="copyLink('viewLink')">コピー</button>
+        </div>
+        <p class="hint">※ メッセージが集まってから誕生日の人に送りましょう！</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>届いたメッセージ（<%= messages.length %>件）</h2>
+      <% if (messages.length === 0) { %>
+        <p class="empty">まだメッセージがありません。投稿用リンクを共有してメッセージを募りましょう！</p>
+      <% } else { %>
+        <div class="message-list">
+          <% messages.forEach(function(msg) { %>
+            <div class="message-card">
+              <div class="message-author"><%= msg.author %></div>
+              <div class="message-body"><%= msg.body %></div>
+            </div>
+          <% }); %>
+        </div>
+      <% } %>
+    </div>
+
+    <a href="/" class="back-link">← トップに戻る</a>
+  </div>
+
+  <script>
+    function copyLink(id) {
+      const input = document.getElementById(id);
+      input.select();
+      navigator.clipboard.writeText(input.value).then(function() {
+        const btn = input.nextElementSibling;
+        btn.textContent = 'コピーしました！';
+        setTimeout(function() { btn.textContent = 'コピー'; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>
